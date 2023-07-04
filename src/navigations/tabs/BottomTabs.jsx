@@ -1,5 +1,10 @@
 // ** libaries imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Octicons,
+} from "react-native-vector-icons";
 
 // ** local imports
 import Favorites from "screens/BottomTabs/Favorites";
@@ -14,12 +19,51 @@ export default function BottomTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          position: "absolute",
+          bottom: 20,
+          marginHorizontal: 20,
+          marginVertical: 10,
+          borderRadius: 10,
+        },
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Favorites" component={Favorites} />
-      <Tab.Screen name="Vaouchers" component={Vouchers} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Octicons color={color} name="home" size={20} />
+          ),
+        }}
+        name="Home"
+        component={Home}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Octicons color={color} name="heart-fill" size={20} />
+          ),
+        }}
+        name="Favorites"
+        component={Favorites}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons color={color} name="ticket" size={20} />
+          ),
+        }}
+        name="Vouchers"
+        component={Vouchers}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons color={color} name="person" size={20} />
+          ),
+        }}
+        name="Profile"
+        component={Profile}
+      />
     </Tab.Navigator>
   );
 }
