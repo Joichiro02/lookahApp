@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabs from "navigations/tabs/BottomTabs";
 import GridNavScreen from "screens/GridNavScreen";
 import AuthStack from "navigations/stacks/AuthStack";
+import ScreenStack from "./ScreenStack";
 
 const Stack = createNativeStackNavigator();
 const AuthenticationUserContext = createContext();
@@ -64,5 +65,6 @@ const AuthenticatedUserProvider = ({ children }) => {
 // }
 
 export default function index() {
-    return <AuthStack />;
+    // return <AuthStack />;
+    return <ScreenStack />;
 }

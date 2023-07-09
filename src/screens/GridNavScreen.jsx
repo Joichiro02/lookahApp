@@ -11,7 +11,7 @@ import BodyCont from "components/layouts/BodyCont";
 import Image1 from "assets/Image1.jpg";
 
 export default function GridNavScreen() {
-    const { goBack } = useNavigation();
+    const { goBack, navigate } = useNavigation();
     const { params } = useRoute();
 
     return (
@@ -48,7 +48,10 @@ export default function GridNavScreen() {
                         scrollEnabled
                         data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
                         renderItem={() => (
-                            <View className="my-2 space-y-1">
+                            <TouchableOpacity
+                                onPress={() => navigate("ItemScreen")}
+                                className="my-2 space-y-1"
+                            >
                                 <View className="relative">
                                     <Ionicons
                                         className="absolute z-10 right-2 top-2"
@@ -100,7 +103,7 @@ export default function GridNavScreen() {
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         )}
                     />
                 </View>
