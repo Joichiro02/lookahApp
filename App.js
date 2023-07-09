@@ -3,15 +3,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // ** local imports
-import BottomTabs from "./src/navigations/tabs/BottomTabs";
+import StackScreens from "./src/navigations/stacks";
 
 export default function App() {
-  return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <BottomTabs />
-        <StatusBar style="auto" />
-      </NavigationContainer>
-    </SafeAreaProvider>
-  );
+    return (
+        <SafeAreaProvider>
+            <NavigationContainer>
+                <StackScreens />
+                <StatusBar style="auto" />
+            </NavigationContainer>
+        </SafeAreaProvider>
+    );
 }

@@ -22,51 +22,61 @@ import Percentage from "assets/Percentage.png";
 import Restaurant from "assets/Restaurant.png";
 import TravelGuide from "assets/TravelGuide.png";
 import Image1 from "assets/Image1.jpg";
+import { useNavigation } from "@react-navigation/native";
 
 const navItems = [
     {
         icon: DoubleBed,
         title: "Hotel",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
     {
         icon: CockTail,
         title: "Bar & Grill",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
     {
         icon: Restaurant,
         title: "Restaurant",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
     {
         icon: Park,
         title: "Park",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
     {
         icon: TravelGuide,
         title: "Tourist Spot",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
     {
         icon: Company,
         title: "Establishment",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
     {
         icon: Carousel,
         title: "Activities",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
     {
         icon: Percentage,
         title: "Promos",
-        navigation: "",
+        subTitle: "Lorem ipsum dolor",
+        navigation: "GridNavScreen",
     },
 ];
 
 export default function Home() {
+    const navigation = useNavigation();
     return (
         <>
             <HeaderCont>
@@ -76,7 +86,7 @@ export default function Home() {
                         className="h-10 w-32"
                         resizeMode="contain"
                     />
-                    <TextField />
+                    <TextField placeholder="What do you have in mind?" />
                 </View>
             </HeaderCont>
 
@@ -103,7 +113,18 @@ export default function Home() {
                             keyExtractor={(_, index) => index.toString()}
                             renderItem={({ item, index }) => (
                                 <View className="mb-4 flex-1 items-center space-y-1">
-                                    <TouchableOpacity className=" bg-white rounded-md items-center justify-center p-1 shadow-md shadow-black">
+                                    <TouchableOpacity
+                                        onPress={() =>
+                                            navigation.navigate(
+                                                item.navigation,
+                                                {
+                                                    title: item.title,
+                                                    subTitle: item.subTitle,
+                                                }
+                                            )
+                                        }
+                                        className=" bg-white rounded-md items-center justify-center p-1 shadow-md shadow-black"
+                                    >
                                         <Image
                                             source={item.icon}
                                             resizeMode="contain"
