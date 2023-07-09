@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // ** local imports
-import AppLogo from "assets/AppLogoColored.png";
 import FacebookLogo from "assets/Facebook.png";
 import GoogleLogo from "assets/Google.png";
 import LinkInLogo from "assets/LinkIn.png";
