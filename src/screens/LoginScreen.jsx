@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // ** local imports
@@ -10,6 +11,8 @@ import GoogleLogo from "assets/Google.png";
 import LinkInLogo from "assets/LinkIn.png";
 
 export default function LoginScreen() {
+    const { navigate } = useNavigation();
+
     return (
         <View className="flex-1 bg-white px-5">
             <SafeAreaView className="flex-1">
@@ -85,7 +88,11 @@ export default function LoginScreen() {
 
                 <View className="flex-1 justify-self-end items-end justify-center pb-4 flex-row space-x-2">
                     <Text className="font-bold">Don’t have an account?</Text>
-                    <Text className="text-[#FF0844] font-bold">Create one</Text>
+                    <TouchableOpacity onPress={() => navigate("SignupScreen")}>
+                        <Text className="text-[#FF0844] font-bold">
+                            Create one
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
         </View>
