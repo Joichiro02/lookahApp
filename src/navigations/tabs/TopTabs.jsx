@@ -5,7 +5,7 @@ import { colors } from "themes";
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function TopTabs({ tabs }) {
+export default function TopTabs({ tabs, tabBarStyle }) {
     return (
         <Tab.Navigator
             screenOptions={{
@@ -14,6 +14,7 @@ export default function TopTabs({ tabs }) {
                     shadowColor: "#00000000",
                     // borderBottomColor: "#000",
                     // borderBottomWidth: 2,
+                    ...tabBarStyle,
                 },
                 tabBarLabelStyle: {
                     fontWeight: "bold",
@@ -22,6 +23,9 @@ export default function TopTabs({ tabs }) {
                 tabBarInactiveTintColor: colors.TextColor,
                 tabBarIndicatorStyle: {
                     backgroundColor: colors.Primary,
+                },
+                tabBarAndroidRipple: {
+                    borderless: false,
                 },
             }}
         >

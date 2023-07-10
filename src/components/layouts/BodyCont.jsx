@@ -5,7 +5,7 @@ import { View } from "react-native";
 export default function BodyCont({ children, style }) {
     return (
         <View
-            className={`z-10 -mt-16 bg-white flex-1 rounded-l-3xl rounded-r-3xl p-5 ${style}`}
+            className={`flex-1 z-10 -mt-16 bg-white rounded-tl-3xl rounded-tr-3xl p-5 ${style}`}
         >
             {children}
         </View>

@@ -26,6 +26,7 @@ export default function BottomTabs() {
                     marginVertical: 10,
                     borderRadius: 10,
                 },
+                tabBarHideOnKeyboard: true,
             }}
         >
             <Tab.Screen
