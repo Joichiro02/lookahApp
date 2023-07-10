@@ -3,6 +3,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { AntDesign, Ionicons, Octicons } from "react-native-vector-icons";
+import { BlurView } from "expo-blur";
 
 import Image1 from "assets/Image1.jpg";
 import Description from "./tabs/Description";
@@ -44,7 +45,12 @@ export default function ItemScreen() {
                     style={{ height: "100%", width: "100%" }}
                     resizeMode="cover"
                 />
-                <View className="absolute flex-row justify-between w-full bottom-0 pt-2 pb-4 px-6 bg-[#66666699] rounded-bl-3xl rounded-br-3xl">
+                <BlurView
+                    className="absolute flex-row justify-between w-full bottom-0 pt-2 pb-4 px-6 rounded-bl-3xl rounded-br-3xl"
+                    tint="dark"
+                    intensity={75}
+                >
+                    {/* <View className="absolute flex-row justify-between w-full bottom-0 pt-2 pb-4 px-6 rounded-bl-3xl rounded-br-3xl"> */}
                     <View>
                         <Text className="text-[#DADADA] text-xl font-semibold">
                             Pinto Art Museum
@@ -65,11 +71,12 @@ export default function ItemScreen() {
                             size={30}
                         />
                     </View>
-                </View>
+                    {/* </View> */}
+                </BlurView>
             </View>
-            <View className="relative flex-1 mt-2">
+            <View className="relative flex-1 mt-2 mx-5">
                 <View className="absolute w-full bottom-6 z-10">
-                    <TouchableOpacity className="items-center justify-center bg-[#FF0844] mx-8 py-3 rounded-xl">
+                    <TouchableOpacity className="items-center justify-center bg-[#FF0844] mx-4 py-3 rounded-xl">
                         <Text className="text-white text-lg font-bold uppercase">
                             See Available Voucher
                         </Text>
