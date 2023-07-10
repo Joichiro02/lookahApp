@@ -8,10 +8,8 @@ import StackScreens from "./src/navigations/stacks";
 export default function App() {
     return (
         <SafeAreaProvider>
-            <NavigationContainer>
-                <StackScreens />
-                <StatusBar style="auto" />
-            </NavigationContainer>
+            <StackScreens />
+            <StatusBar style="auto" />
         </SafeAreaProvider>
     );
 }

@@ -1,13 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { ActivityIndicator, View } from "react-native";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { onAuthStateChanged } from "firebase/auth";
+import { NavigationContainer } from "@react-navigation/native";
 
-import BottomTabs from "navigations/tabs/BottomTabs";
-import GridNavScreen from "screens/GridNavScreen";
 import AuthStack from "navigations/stacks/AuthStack";
 import ScreenStack from "./ScreenStack";
 
-const Stack = createNativeStackNavigator();
+import { auth } from "config/firebase";
+
 const AuthenticationUserContext = createContext();
 
 function RootNavigation() {
@@ -42,7 +43,7 @@ function RootNavigation() {
 
     return (
         <NavigationContainer>
-            {user ? <ChatStack /> : <AuthStack />}
+            {user ? <ScreenStack /> : <AuthStack />}
         </NavigationContainer>
     );
 }
@@ -56,15 +57,10 @@ const AuthenticatedUserProvider = ({ children }) => {
     );
 };
 
-// export default function index() {
-//     return (
-//         <AuthenticatedUserProvider>
-//             <RootNavigation />
-//         </AuthenticatedUserProvider>
-//     );
-// }
-
 export default function index() {
-    // return <AuthStack />;
-    return <ScreenStack />;
+    return (
+        <AuthenticatedUserProvider>
+            <RootNavigation />
+        </AuthenticatedUserProvider>
+    );
 }

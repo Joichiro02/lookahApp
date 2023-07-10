@@ -1,6 +1,14 @@
-import React from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import {
+    Alert,
+    Image,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -9,8 +17,21 @@ import FacebookLogo from "assets/Facebook.png";
 import GoogleLogo from "assets/Google.png";
 import LinkInLogo from "assets/LinkIn.png";
 
+import { auth } from "config/firebase";
+
 export default function SignupScreen() {
+    // ** states
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const { navigate } = useNavigation();
+
+    const onHandleSignup = () => {
+        if ((email !== "") & (password !== "")) {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => console.log("Signup Success"))
+                .catch((error) => Alert.alert("Login Error", error.message));
+        }
+    };
 
     return (
         <View className="flex-1 bg-white px-5">
@@ -41,8 +62,8 @@ export default function SignupScreen() {
                         autoCapitalize="none"
                         keyboardType="email-address"
                         textContentType="emailAddress"
-                        // value={email}
-                        // onChangeText={(text) => setEmail(text)}
+                        value={email}
+                        onChangeText={(text) => setEmail(text)}
                     />
                     <TextInput
                         className="bg-[#f6f7f8] my-3 py-2 px-2 rounded-md shadow-lg shadow-black text-lg"
@@ -51,8 +72,8 @@ export default function SignupScreen() {
                         autoCorrect={false}
                         secureTextEntry={true}
                         textContentType="password"
-                        // value={password}
-                        // onChangeText={(text) => setPassword(text)}
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
                     />
                 </View>
 
@@ -61,7 +82,10 @@ export default function SignupScreen() {
                         <Text className="font-semibold">
                             By signing up, you agree to our Terms and Conditions
                         </Text>
-                        <TouchableOpacity className="w-full bg-[#FF0844] rounded-xl p-3 items-center">
+                        <TouchableOpacity
+                            className="w-full bg-[#FF0844] rounded-xl p-3 items-center"
+                            onPress={onHandleSignup}
+                        >
                             <Text className="text-white font-bold text-xl uppercase">
                                 Sign Up
                             </Text>
