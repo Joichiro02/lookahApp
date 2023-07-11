@@ -1,3 +1,4 @@
+// ** react and react-native imports
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 

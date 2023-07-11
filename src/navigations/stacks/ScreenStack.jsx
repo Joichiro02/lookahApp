@@ -1,23 +1,27 @@
+// ** libraries imports
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+// ** local imports
 import BottomTabs from "navigations/tabs/BottomTabs";
 import GridNavScreen from "screens/GridNavScreen";
 import ItemScreen from "screens/ItemScreen";
+import Settings from "screens/Settings";
 
 const Stack = createNativeStackNavigator();
 
 export default function ScreenStack() {
     return (
         <Stack.Navigator
-            initialRouteName="mainScreen"
+            initialRouteName="MainScreen"
             screenOptions={{
                 headerShown: false,
                 animation: "slide_from_right",
             }}
         >
-            <Stack.Screen name="mainScreen" component={BottomTabs} />
             <Stack.Screen name="GridNavScreen" component={GridNavScreen} />
             <Stack.Screen name="ItemScreen" component={ItemScreen} />
+            <Stack.Screen name="MainScreen" component={BottomTabs} />
+            <Stack.Screen name="SettingsScreen" component={Settings} />
         </Stack.Navigator>
     );
 }

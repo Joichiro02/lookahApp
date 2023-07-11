@@ -1,12 +1,14 @@
+// ** react and react-native imports
 import { createContext, useContext, useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 
+// ** libraries imports
 import { onAuthStateChanged } from "firebase/auth";
 import { NavigationContainer } from "@react-navigation/native";
 
+// ** local imports
 import AuthStack from "navigations/stacks/AuthStack";
 import ScreenStack from "./ScreenStack";
-
 import { auth } from "config/firebase";
 
 const AuthenticationUserContext = createContext();

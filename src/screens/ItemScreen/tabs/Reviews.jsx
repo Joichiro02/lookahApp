@@ -1,8 +1,11 @@
+// ** react and react-native imports
 import React from "react";
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 
+// ** libraries imports
 import { Octicons } from "react-native-vector-icons";
 
+// ** images imports
 import Image1 from "assets/Image1.jpg";
 
 export default function Reviews() {

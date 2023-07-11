@@ -1,6 +1,8 @@
+// ** react and react-native imports
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 
+// ** libraries imports
 import { Feather, FontAwesome } from "react-native-vector-icons";
 
 export default function Description() {

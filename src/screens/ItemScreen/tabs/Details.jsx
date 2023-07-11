@@ -1,8 +1,10 @@
+// ** react and react-native imports
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 
-import { MaterialIcons } from "react-native-vector-icons";
+// ** libraries imports
 import MapView, { Marker } from "react-native-maps";
+import { MaterialIcons } from "react-native-vector-icons";
 
 export default function Details() {
     return (

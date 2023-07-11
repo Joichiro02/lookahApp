@@ -1,6 +1,8 @@
+// ** libraries imports
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import InitialLoadScreen from "screens/InitialLoadScreen";
 
+// ** local imports
 import LoginScreen from "screens/LoginScreen";
 import SignupScreen from "screens/SignupScreen";
 

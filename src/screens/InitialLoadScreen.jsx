@@ -1,10 +1,13 @@
+// ** react and react-native imports
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
+// ** libraries imports
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// ** images imports
 import GetStarted from "assets/GetStarted.png";
-import { useNavigation } from "@react-navigation/native";
 
 export default function InitialLoadScreen() {
     const { navigate } = useNavigation();

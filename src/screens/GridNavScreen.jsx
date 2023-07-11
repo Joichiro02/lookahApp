@@ -1,13 +1,18 @@
+// ** react and react-native imports
 import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 
+// ** libraries imports
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons, MaterialIcons, Octicons } from "react-native-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// ** local imports
+import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
 import TextField from "components/common/InputField";
-import BodyCont from "components/layouts/BodyCont";
+
+// ** images imports
 import Image1 from "assets/Image1.jpg";
 
 export default function GridNavScreen() {

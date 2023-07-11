@@ -1,15 +1,20 @@
+// ** react and react-native imports
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
+// ** libraries imports
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { AntDesign, Ionicons, Octicons } from "react-native-vector-icons";
 import { BlurView } from "expo-blur";
 
-import Image1 from "assets/Image1.jpg";
+// ** local imports
 import Description from "./tabs/Description";
 import Details from "./tabs/Details";
 import Reviews from "./tabs/Reviews";
 import TopTabs from "navigations/tabs/TopTabs";
+
+// ** images imports
+import Image1 from "assets/Image1.jpg";
 
 const tabs = [
     {

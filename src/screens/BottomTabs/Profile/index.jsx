@@ -1,15 +1,19 @@
+// ** react and react-native imports
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
+// ** libraries imports
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// ** local imports
 import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
-
-import Profile from "assets/profile.jpg";
-import TopTabs from "navigations/tabs/TopTabs";
 import MyProfile from "./Tabs/MyProfile";
 import Setting from "./Tabs/Setting";
+import TopTabs from "navigations/tabs/TopTabs";
+
+// ** images imports
+import Profile from "assets/profile.jpg";
 
 const tabs = [
     {

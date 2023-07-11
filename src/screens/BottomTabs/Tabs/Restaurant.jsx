@@ -1,8 +1,11 @@
+// ** react and react-native imports
 import React from "react";
 import { FlatList, Image, Text, View } from "react-native";
 
+// ** libraries imports
 import { Ionicons, MaterialIcons, Octicons } from "react-native-vector-icons";
 
+// ** local imports
 import Container from "components/layouts/Container";
 import FoodImage from "assets/foodImage.jpg";
 

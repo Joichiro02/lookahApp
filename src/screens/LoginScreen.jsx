@@ -1,3 +1,4 @@
+// ** react and react-native imports
 import React, { useState } from "react";
 import {
     Alert,
@@ -8,17 +9,19 @@ import {
     View,
 } from "react-native";
 
+// ** libraries imports
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // ** local imports
+import { auth } from "config/firebase";
+
+// ** images imports
 import AppLogo from "assets/AppLogoColored.png";
 import FacebookLogo from "assets/Facebook.png";
 import GoogleLogo from "assets/Google.png";
 import LinkInLogo from "assets/LinkIn.png";
-
-import { auth } from "config/firebase";
 
 export default function LoginScreen() {
     // ** states

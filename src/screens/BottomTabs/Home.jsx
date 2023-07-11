@@ -3,72 +3,80 @@ import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 
 // ** libraries imports
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 import { Foundation } from "react-native-vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // ** local imports
 import AppLogo from "assets/AppLogo.png";
+import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
 import TextField from "components/common/InputField";
-import BodyCont from "components/layouts/BodyCont";
 
 // ** images imports
 import Carousel from "assets/Carousel.png";
 import CockTail from "assets/Cocktail.png";
 import Company from "assets/Company.png";
 import DoubleBed from "assets/DoubleBed.png";
+import Image1 from "assets/Image1.jpg";
 import Park from "assets/Park.png";
 import Percentage from "assets/Percentage.png";
 import Restaurant from "assets/Restaurant.png";
 import TravelGuide from "assets/TravelGuide.png";
-import Image1 from "assets/Image1.jpg";
-import { useNavigation } from "@react-navigation/native";
 
 const navItems = [
     {
         icon: DoubleBed,
-        title: "Hotel",
+        label: "Hotel",
+        title: "Hotels",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
     },
     {
         icon: CockTail,
-        title: "Bar & Grill",
+        label: "Bar & Grill",
+        title: "Bar and Grill",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
     },
     {
         icon: Restaurant,
-        title: "Restaurant",
+        label: "Restaurant",
+        title: "Restaurants",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
     },
     {
         icon: Park,
+        label: "Park",
         title: "Park",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
     },
     {
         icon: TravelGuide,
+        label: "Tourist Spot",
         title: "Tourist Spot",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
     },
     {
         icon: Company,
+        label: "Establishment",
         title: "Establishment",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
     },
     {
         icon: Carousel,
+        label: "Activities",
         title: "Activities",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
     },
     {
         icon: Percentage,
+        label: "Promos",
         title: "Promos",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
@@ -131,7 +139,7 @@ export default function Home() {
                                             style={{ height: 50, width: 50 }}
                                         />
                                     </TouchableOpacity>
-                                    <Text>{item.title}</Text>
+                                    <Text>{item.label}</Text>
                                 </View>
                             )}
                         />

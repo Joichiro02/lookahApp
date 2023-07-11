@@ -1,13 +1,19 @@
+// ** react and react-native imports
 import React, { useState } from "react";
 import { Switch, Text, TouchableOpacity, View } from "react-native";
 
+// ** libraries imports
 import { signOut } from "firebase/auth";
+import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "react-native-vector-icons";
 
+// ** local imports
 import { auth } from "config/firebase";
 
 export default function Setting() {
     const [isEnabled, setIsEnabled] = useState(false);
+
+    const { navigate } = useNavigation();
 
     const onSignOut = () => {
         signOut(auth).catch((error) =>
@@ -69,7 +75,10 @@ export default function Setting() {
 
             <View className="mb-6">
                 <Text className="text-[#7B7B7B] text-base">Security</Text>
-                <TouchableOpacity className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B] py-2">
+                <TouchableOpacity
+                    className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B] py-2"
+                    onPress={() => navigate("SettingsScreen")}
+                >
                     <Text className="font-semibold text-base">
                         Change Password
                     </Text>

@@ -1,13 +1,15 @@
 // ** libraries imports
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
+// ** local imports
 import { colors } from "themes";
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function TopTabs({ tabs, tabBarStyle }) {
+export default function TopTabs({ initialRouteName, tabs, tabBarStyle }) {
     return (
         <Tab.Navigator
+            initialRouteName={initialRouteName}
             screenOptions={{
                 tabBarStyle: {
                     backgroundColor: "#00000000",
