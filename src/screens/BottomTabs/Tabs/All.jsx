@@ -12,6 +12,7 @@ import ModalCont from "components/layouts/ModalCont";
 
 import Chives from "assets/chives.png";
 import VoucherBg from "assets/VoucherBg.png";
+import VoucherBg2 from "assets/VoucherBg2.png";
 import Kwinsole from "assets/Kwinsole.png";
 import Illumina from "assets/Illumina.png";
 import Ribbon from "assets/ribbon.png";
@@ -96,10 +97,51 @@ export default function All() {
       </View>
 
       <ModalCont open={open} setOpen={setOpen}>
-        <View className="h-5/6 bg-white rounded-tl-3xl rounded-tr-3xl">
-          <Text>Hello!</Text>
+        <View className="h-5/6 bg-white rounded-tl-3xl rounded-tr-3xl items-center justify-center">
+          <ImageBackground
+            source={VoucherBg2}
+            className="w-96 h-96 p-10 space-y-6"
+            resizeMode="contain"
+          >
+            <View className="h-52 items-center justify-center">
+              <Image source={Chives} resizeMode="contain" />
+            </View>
+            <View className="px-4">
+              <Text className="font-semibold text-2xl">10% OFF</Text>
+              <Text className="font-medium text-base">
+                Chives Bistro & Market
+              </Text>
+              <View className="space-y-.5 mt-1">
+                <Text className="pl-3">
+                  One voucher is good for one transaction.
+                </Text>
+                <Text className="pl-3">
+                  Valid daily from 1:00 PM to 8:00 PM.
+                </Text>
+                <Text className="pl-3">
+                  Not applicable with other discounts.
+                </Text>
+              </View>
+            </View>
+          </ImageBackground>
 
-          <Button title="Hide modal" onPress={() => setOpen((prev) => !prev)} />
+          <View className="w-full">
+            <TouchableOpacity className="bg-[#FF0844] mt-8 mx-10 py-3 rounded-lg items-center justify-center">
+              <Text className="text-white uppercase font-bold text-base">
+                Redeem Now
+              </Text>
+            </TouchableOpacity>
+            <View className="items-center justify-center">
+              <TouchableOpacity
+                className="w-24 mt-5"
+                onPress={() => setOpen((prev) => !prev)}
+              >
+                <Text className="uppercase font-bold text-base underline">
+                  Redeem Later
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </ModalCont>
     </>
