@@ -84,7 +84,7 @@ const navItems = [
 ];
 
 export default function Home() {
-    const navigation = useNavigation();
+    const { navigate } = useNavigation();
     return (
         <>
             <HeaderCont>
@@ -110,9 +110,13 @@ export default function Home() {
                                 <Text>Baliwag, Bulacan</Text>
                             </View>
                         </View>
-                        <Text className="text-lg font-bold underline">
-                            Change Location
-                        </Text>
+                        <TouchableOpacity
+                            onPress={() => navigate("UploadScreen")}
+                        >
+                            <Text className="text-lg font-bold underline">
+                                Change Location
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <SafeAreaView>
                         <FlatList
@@ -123,13 +127,10 @@ export default function Home() {
                                 <View className="mb-4 flex-1 items-center space-y-1">
                                     <TouchableOpacity
                                         onPress={() =>
-                                            navigation.navigate(
-                                                item.navigation,
-                                                {
-                                                    title: item.title,
-                                                    subTitle: item.subTitle,
-                                                }
-                                            )
+                                            navigate(item.navigation, {
+                                                title: item.title,
+                                                subTitle: item.subTitle,
+                                            })
                                         }
                                         className=" bg-white rounded-md items-center justify-center p-1 shadow-md shadow-black"
                                     >
