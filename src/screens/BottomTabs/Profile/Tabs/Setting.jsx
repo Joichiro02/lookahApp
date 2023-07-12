@@ -22,7 +22,7 @@ export default function Setting() {
     };
 
     return (
-        <View className="flex-1 bg-white py-5">
+        <View className="flex-1 bg-white  p-5 pb-0">
             <View className="mb-6">
                 <Text className="text-[#7B7B7B] text-base">Display</Text>
                 <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B]">

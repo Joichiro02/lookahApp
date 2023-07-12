@@ -1,6 +1,17 @@
 // ** react and react-native imports
-import React, { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useRef, useState } from "react";
+import {
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+    findNodeHandle,
+} from "react-native";
+
+import { doc, addDoc, setDoc, collection } from "firebase/firestore";
+import { database } from "config/firebase";
+
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const TextField = ({ label, value, setValue, ...params }) => {
     return (
@@ -19,16 +30,60 @@ const TextField = ({ label, value, setValue, ...params }) => {
 };
 
 export default function MyProfile() {
-    const [name, setName] = useState("Mark Anthony");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [nickname, setNickname] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNum, setPhonenum] = useState("");
+    const ref = useRef(null);
+
+    const postData = async () => {
+        await addDoc(collection(database, "users"), {
+            firstname,
+            lastname,
+            nickname,
+            email,
+            phone_number: phoneNum,
+        });
+    };
+
+    const scrollToInput = (reactNode) => {
+        // Add a 'scroll' ref to your ScrollView
+        ref.scrollToFocusedInput(reactNode);
+    };
+
     return (
-        <View className="flex-1 bg-white py-6">
-            <TextField label={"First Name"} value={name} setValue={setName} />
-            <TextField label={"Last Name"} value={name} setValue={setName} />
-            <TextField label={"Nickname"} value={name} setValue={setName} />
+        <KeyboardAwareScrollView
+            className="flex-1 bg-white p-5 pb-0"
+            innerRef={(ref) => {
+                keyref = ref;
+            }}
+            extraHeight={50}
+        >
+            <TextField
+                label={"First Name"}
+                value={firstname}
+                setValue={setFirstname}
+            />
+            <TextField
+                label={"Last Name"}
+                value={lastname}
+                setValue={setLastname}
+            />
+            <TextField
+                label={"Nickname"}
+                value={nickname}
+                setValue={setNickname}
+            />
             <TextField
                 label={"Email Address"}
-                value={name}
-                setValue={setName}
+                value={email}
+                setValue={setEmail}
+                textContentType="emailAddress"
+                onFocus={(event) => {
+                    // `bind` the function if you're using ES6 classes
+                    scrollToInput(findNodeHandle(event.target));
+                }}
             />
 
             <Text className="text-[#7B7B7B] mb-3">
@@ -42,8 +97,8 @@ export default function MyProfile() {
                 <View className="flex-1">
                     <TextField
                         label={"Mobile Number"}
-                        value={name}
-                        setValue={setName}
+                        value={phoneNum}
+                        setValue={setPhonenum}
                     />
                 </View>
             </View>
@@ -53,11 +108,14 @@ export default function MyProfile() {
                 verification process.
             </Text>
 
-            <TouchableOpacity className="bg-[#FF0844] mt-8 py-3 rounded-lg items-center justify-center">
+            <TouchableOpacity
+                className="bg-[#FF0844] mt-8 py-3 rounded-lg items-center justify-center"
+                onPress={postData}
+            >
                 <Text className="text-white uppercase font-bold text-base">
                     Update
                 </Text>
             </TouchableOpacity>
-        </View>
+        </KeyboardAwareScrollView>
     );
 }

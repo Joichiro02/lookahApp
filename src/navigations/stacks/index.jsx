@@ -4,12 +4,21 @@ import { ActivityIndicator, View } from "react-native";
 
 // ** libraries imports
 import { onAuthStateChanged } from "firebase/auth";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 // ** local imports
 import AuthStack from "navigations/stacks/AuthStack";
 import ScreenStack from "./ScreenStack";
 import { auth } from "config/firebase";
+
+// ** color theme of react-navigation
+const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: "#FFFFFF",
+    },
+};
 
 const AuthenticationUserContext = createContext();
 
@@ -44,7 +53,7 @@ function RootNavigation() {
     }
 
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={MyTheme}>
             {user ? <ScreenStack /> : <AuthStack />}
         </NavigationContainer>
     );

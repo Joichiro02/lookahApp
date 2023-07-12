@@ -99,7 +99,7 @@ export default function Home() {
             </HeaderCont>
 
             <BodyCont>
-                <View className="px-2 flex-1">
+                <View className="flex-1">
                     <View className="flex-row items-center justify-between px-2">
                         <View className="flex-row items-center space-x-2">
                             <Foundation name="target-two" size={15} />
@@ -146,7 +146,7 @@ export default function Home() {
                         />
                     </SafeAreaView>
 
-                    <View className="flex-1 mb-12">
+                    <View className="flex-1">
                         <View className="flex-row items-center justify-between">
                             <Text className="font-bold text-3xl">
                                 Nearby Activities

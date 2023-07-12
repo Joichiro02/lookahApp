@@ -39,8 +39,8 @@ export default function index() {
                     </Text>
                 </SafeAreaView>
             </HeaderCont>
-            <BodyCont>
-                <View className="flex-row items-center space-x-4">
+            <BodyCont style={"p-0"}>
+                <View className="flex-row items-center space-x-4 p-5 pb-0">
                     <Image
                         className="rounded-full"
                         source={Profile}

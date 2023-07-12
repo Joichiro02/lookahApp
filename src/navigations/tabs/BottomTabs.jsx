@@ -20,10 +20,8 @@ export default function BottomTabs() {
             screenOptions={{
                 headerShown: false,
                 tabBarStyle: {
-                    position: "absolute",
-                    bottom: 6,
                     marginHorizontal: 20,
-                    marginVertical: 10,
+                    marginBottom: 10,
                     borderRadius: 10,
                 },
                 tabBarHideOnKeyboard: true,
