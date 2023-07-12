@@ -12,7 +12,7 @@ import ScreenStack from "./ScreenStack";
 import { auth } from "config/firebase";
 
 // ** color theme of react-navigation
-const MyTheme = {
+const NavTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
@@ -53,7 +53,7 @@ function RootNavigation() {
     }
 
     return (
-        <NavigationContainer theme={MyTheme}>
+        <NavigationContainer theme={NavTheme}>
             {user ? <ScreenStack /> : <AuthStack />}
         </NavigationContainer>
     );
