@@ -1,8 +1,8 @@
 // ** react and react-native imports
 import React, { useState } from "react";
 import {
-    Alert,
     Image,
+    ScrollView,
     Text,
     TextInput,
     TouchableOpacity,
@@ -10,12 +10,14 @@ import {
 } from "react-native";
 
 // ** libraries imports
+import Toast from "react-native-toast-message";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // ** local imports
-import { auth } from "config/firebase";
+import { auth, database } from "config/firebase";
 
 // ** images imports
 import FacebookLogo from "assets/Facebook.png";
@@ -23,23 +25,51 @@ import GoogleLogo from "assets/Google.png";
 import LinkInLogo from "assets/LinkIn.png";
 
 export default function SignupScreen() {
-    // ** states
+    // ** state
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [nickname, setNickname] = useState("");
+    const [phoneNum, setPhonenum] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     const { navigate } = useNavigation();
 
     const onHandleSignup = () => {
-        if ((email !== "") & (password !== "")) {
+        if (email !== "" && password !== "") {
             createUserWithEmailAndPassword(auth, email, password)
-                .then(() => console.log("Signup Success"))
-                .catch((error) => Alert.alert("Login Error", error.message));
+                .then(async (data) => {
+                    await setDoc(doc(database, "users", data.user.uid), {
+                        firstname,
+                        lastname,
+                        nickname,
+                        phone_number: phoneNum,
+                        user: {
+                            _id: data.user.uid,
+                            name: data.user.email,
+                        },
+                    });
+                })
+                .then(() => {
+                    Toast.show({
+                        type: "success",
+                        text1: "Account Successfully Created",
+                    });
+                })
+                .catch((error) => {
+                    Toast.show({
+                        type: "error",
+                        text1: "Error",
+                        text2: error.toString(),
+                    });
+                });
         }
     };
 
     return (
-        <View className="flex-1 bg-white px-5">
+        <ScrollView className="flex-1 bg-white">
             <SafeAreaView className="flex-1">
-                <View className=" h-52 items-center justify-center">
+                <View className=" h-40 items-center justify-center">
                     <Text className="text-[#FF0844] font-bold text-5xl">
                         Let’s Get Started
                     </Text>
@@ -48,16 +78,43 @@ export default function SignupScreen() {
                     </Text>
                 </View>
 
-                <View>
+                <View className="px-5">
                     <TextInput
                         className="bg-[#f6f7f8] my-3 py-2 px-2 rounded-md shadow-lg shadow-black text-lg"
-                        placeholder="Name"
+                        placeholder="Firstname"
                         autoCapitalize="none"
                         keyboardType="default"
-                        textContentType="emailAddress"
+                        textContentType="givenName"
                         autoFocus={true}
-                        // value={email}
-                        // onChangeText={(text) => setEmail(text)}
+                        value={firstname}
+                        onChangeText={(text) => setFirstname(text)}
+                    />
+                    <TextInput
+                        className="bg-[#f6f7f8] my-3 py-2 px-2 rounded-md shadow-lg shadow-black text-lg"
+                        placeholder="Lastname"
+                        autoCapitalize="none"
+                        keyboardType="default"
+                        textContentType="familyName"
+                        value={lastname}
+                        onChangeText={(text) => setLastname(text)}
+                    />
+                    <TextInput
+                        className="bg-[#f6f7f8] my-3 py-2 px-2 rounded-md shadow-lg shadow-black text-lg"
+                        placeholder="Nickname"
+                        autoCapitalize="none"
+                        keyboardType="default"
+                        textContentType="nickname"
+                        value={nickname}
+                        onChangeText={(text) => setNickname(text)}
+                    />
+                    <TextInput
+                        className="bg-[#f6f7f8] my-3 py-2 px-2 rounded-md shadow-lg shadow-black text-lg"
+                        placeholder="Mobile Number"
+                        autoCapitalize="none"
+                        keyboardType="number-pad"
+                        textContentType="telephoneNumber"
+                        value={phoneNum}
+                        onChangeText={(text) => setPhonenum(text)}
                     />
                     <TextInput
                         className="bg-[#f6f7f8] my-3 py-2 px-2 rounded-md shadow-lg shadow-black text-lg"
@@ -80,7 +137,7 @@ export default function SignupScreen() {
                     />
                 </View>
 
-                <View className="my-10 space-y-10 items-center">
+                <View className="my-10 space-y-10 items-center  px-5">
                     <View className="w-full items-center space-y-1">
                         <Text className="font-semibold">
                             By signing up, you agree to our Terms and Conditions
@@ -122,6 +179,6 @@ export default function SignupScreen() {
                     </View>
                 </View>
             </SafeAreaView>
-        </View>
+        </ScrollView>
     );
 }

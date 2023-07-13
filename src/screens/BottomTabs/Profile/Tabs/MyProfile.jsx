@@ -1,5 +1,5 @@
 // ** react and react-native imports
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Text,
     TextInput,
@@ -8,8 +8,16 @@ import {
     findNodeHandle,
 } from "react-native";
 
-import { doc, addDoc, setDoc, collection } from "firebase/firestore";
-import { database } from "config/firebase";
+import {
+    collection,
+    doc,
+    addDoc,
+    getDoc,
+    query,
+    setDoc,
+    where,
+} from "firebase/firestore";
+import { auth, database } from "config/firebase";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -30,27 +38,46 @@ const TextField = ({ label, value, setValue, ...params }) => {
 };
 
 export default function MyProfile() {
+    // ** state
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [nickname, setNickname] = useState("");
-    const [email, setEmail] = useState("");
     const [phoneNum, setPhonenum] = useState("");
-    const ref = useRef(null);
+    const [edit, setEdit] = useState(false);
 
     const postData = async () => {
-        await addDoc(collection(database, "users"), {
+        await setDoc(doc(database, "users", auth.currentUser.uid), {
             firstname,
             lastname,
             nickname,
-            email,
             phone_number: phoneNum,
+            user: {
+                _id: auth.currentUser.uid,
+                name: auth.currentUser.email,
+            },
         });
+        setEdit(false);
     };
 
-    const scrollToInput = (reactNode) => {
-        // Add a 'scroll' ref to your ScrollView
-        ref.scrollToFocusedInput(reactNode);
+    const getUser = async () => {
+        try {
+            const user = await getDoc(
+                doc(database, "users", auth.currentUser.uid)
+            );
+            if (Object.keys(user.data()).length > 0) {
+                setFirstname(user.data().firstname);
+                setLastname(user.data().lastname);
+                setNickname(user.data().nickname);
+                setPhonenum(user.data().phone_number);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <KeyboardAwareScrollView
@@ -64,26 +91,25 @@ export default function MyProfile() {
                 label={"First Name"}
                 value={firstname}
                 setValue={setFirstname}
+                editable={edit}
             />
             <TextField
                 label={"Last Name"}
                 value={lastname}
                 setValue={setLastname}
+                editable={edit}
             />
             <TextField
                 label={"Nickname"}
                 value={nickname}
                 setValue={setNickname}
+                editable={edit}
             />
             <TextField
                 label={"Email Address"}
-                value={email}
-                setValue={setEmail}
+                value={auth.currentUser.email}
                 textContentType="emailAddress"
-                onFocus={(event) => {
-                    // `bind` the function if you're using ES6 classes
-                    scrollToInput(findNodeHandle(event.target));
-                }}
+                editable={false}
             />
 
             <Text className="text-[#7B7B7B] mb-3">
@@ -99,6 +125,7 @@ export default function MyProfile() {
                         label={"Mobile Number"}
                         value={phoneNum}
                         setValue={setPhonenum}
+                        editable={edit}
                     />
                 </View>
             </View>
@@ -108,14 +135,25 @@ export default function MyProfile() {
                 verification process.
             </Text>
 
-            <TouchableOpacity
-                className="bg-[#FF0844] mt-8 py-3 rounded-lg items-center justify-center"
-                onPress={postData}
-            >
-                <Text className="text-white uppercase font-bold text-base">
-                    Update
-                </Text>
-            </TouchableOpacity>
+            {edit ? (
+                <TouchableOpacity
+                    className="bg-[#309234] mt-8 py-3 rounded-lg items-center justify-center"
+                    onPress={postData}
+                >
+                    <Text className="text-white uppercase font-bold text-base">
+                        Save
+                    </Text>
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity
+                    className="bg-[#FF0844] mt-8 py-3 rounded-lg items-center justify-center"
+                    onPress={() => setEdit(true)}
+                >
+                    <Text className="text-white uppercase font-bold text-base">
+                        Edit
+                    </Text>
+                </TouchableOpacity>
+            )}
         </KeyboardAwareScrollView>
     );
 }

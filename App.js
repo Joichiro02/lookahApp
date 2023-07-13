@@ -1,5 +1,5 @@
+import Toast from "react-native-toast-message";
 import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // ** local imports
@@ -10,6 +10,7 @@ export default function App() {
         <SafeAreaProvider>
             <StackScreens />
             <StatusBar style="auto" />
+            <Toast />
         </SafeAreaProvider>
     );
 }

@@ -1,15 +1,9 @@
 // ** react and react-native imports
 import React, { useState } from "react";
-import {
-    Alert,
-    Image,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 // ** libraries imports
+import Toast from "react-native-toast-message";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -32,8 +26,19 @@ export default function LoginScreen() {
     const onHandleLogin = () => {
         if ((email !== "") & (password !== "")) {
             signInWithEmailAndPassword(auth, email, password)
-                .then(() => console.log("Login Success"))
-                .catch((error) => Alert.alert("Login Error", error.message));
+                .then(() => {
+                    Toast.show({
+                        type: "success",
+                        text1: "Login Success",
+                    });
+                })
+                .catch((error) =>
+                    Toast.show({
+                        type: "error",
+                        text1: "Error",
+                        text2: error.toString(),
+                    })
+                );
         }
     };
 
