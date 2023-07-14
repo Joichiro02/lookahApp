@@ -1,8 +1,6 @@
 const IS_DEV = process.env.APP_VARIANT === "development";
 const IS_PRODUCTION = process.env.APP_VARIANT === "production";
 
-console.log(IS_DEV);
-
 export default {
   name: IS_DEV ? "lookahApp (Dev)" : "Lookah",
   slug: "lookahApp",
