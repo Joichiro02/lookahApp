@@ -7,7 +7,7 @@ import { Ionicons, MaterialIcons, Octicons } from "react-native-vector-icons";
 
 // ** local imports
 import Container from "components/layouts/Container";
-import FoodImage from "assets/foodImage.jpg";
+import FoodImage from "assets/images/foodImage.jpg";
 
 export default function Restaurant() {
     return (

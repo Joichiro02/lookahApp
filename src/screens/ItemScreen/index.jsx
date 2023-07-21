@@ -14,7 +14,7 @@ import Reviews from "./tabs/Reviews";
 import TopTabs from "navigations/tabs/TopTabs";
 
 // ** images imports
-import Image1 from "assets/Image1.jpg";
+import Image1 from "assets/images/Image1.jpg";
 
 const tabs = [
     {

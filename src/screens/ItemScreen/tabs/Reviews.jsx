@@ -6,7 +6,7 @@ import { FlatList, Image, Text, View } from "react-native";
 import { Octicons } from "react-native-vector-icons";
 
 // ** images imports
-import Image1 from "assets/Image1.jpg";
+import Image1 from "assets/images/Image1.jpg";
 
 export default function Reviews() {
     return (

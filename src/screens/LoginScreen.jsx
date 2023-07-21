@@ -12,10 +12,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { auth } from "config/firebase";
 
 // ** images imports
-import AppLogo from "assets/AppLogoColored.png";
-import FacebookLogo from "assets/Facebook.png";
-import GoogleLogo from "assets/Google.png";
-import LinkInLogo from "assets/LinkIn.png";
+import AppLogo from "assets/images/AppLogoColored.png";
+import FacebookLogo from "assets/images/Facebook.png";
+import GoogleLogo from "assets/images/Google.png";
+import LinkInLogo from "assets/images/LinkIn.png";
 
 export default function LoginScreen() {
     // ** states

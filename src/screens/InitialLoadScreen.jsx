@@ -3,14 +3,14 @@ import React from "react";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 
 // ** libraries imports
-import Carousel from "react-native-reanimated-carousel";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // ** images imports
-import GetStarted1 from "assets/GetStarted-1.png";
-import GetStarted2 from "assets/GetStarted-2.png";
-import GetStarted3 from "assets/GetStarted-3.png";
+import GetStarted1 from "assets/images/GetStarted-1.png";
+import GetStarted2 from "assets/images/GetStarted-2.png";
+import GetStarted3 from "assets/images/GetStarted-3.png";
+import CarouselSlider from "components/common/CarouselSlider";
 
 const CarouselData = [
     {
@@ -34,20 +34,12 @@ const CarouselData = [
 
 export default function InitialLoadScreen() {
     const { navigate } = useNavigation();
-    const { width, height } = Dimensions.get("window");
+
     return (
         <SafeAreaView className="flex-1">
             <View className="flex-1 px-10 items-center justify-center">
-                <Carousel
-                    loop
-                    width={width}
-                    height={height / 2}
-                    autoPlay={true}
+                <CarouselSlider
                     data={CarouselData}
-                    scrollAnimationDuration={2000}
-                    onSnapToItem={(index) =>
-                        console.log("current index:", index)
-                    }
                     renderItem={({ item, index }) => (
                         <React.Fragment key={index}>
                             <Image

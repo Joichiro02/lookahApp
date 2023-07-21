@@ -13,7 +13,7 @@ import Setting from "./Tabs/Setting";
 import TopTabs from "navigations/tabs/TopTabs";
 
 // ** images imports
-import Profile from "assets/profile.jpg";
+import Profile from "assets/images/profile.jpg";
 
 const tabs = [
     {

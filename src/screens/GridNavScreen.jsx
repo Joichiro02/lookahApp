@@ -13,7 +13,7 @@ import HeaderCont from "components/layouts/HeaderCont";
 import TextField from "components/common/InputField";
 
 // ** images imports
-import Image1 from "assets/Image1.jpg";
+import Image1 from "assets/images/Image1.jpg";
 
 export default function GridNavScreen() {
     const { goBack, navigate } = useNavigation();

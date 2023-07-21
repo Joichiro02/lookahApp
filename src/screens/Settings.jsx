@@ -12,7 +12,7 @@ import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
 
 // ** images imports
-import Profile from "assets/profile.jpg";
+import Profile from "assets/images/profile.jpg";
 
 const TextField = ({ value, setValue, ...params }) => {
     return (

@@ -6,10 +6,10 @@ export default {
     slug: "lookahApp",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./src/assets/ApplicationLogo.png",
+    icon: "./src/assets/images/ApplicationLogo.png",
     userInterfaceStyle: "light",
     splash: {
-        image: "./src/assets/InitialLogo.png",
+        image: "./src/assets/images/InitialLogo.png",
         resizeMode: "contain",
         backgroundColor: "#FF0844",
     },
@@ -19,13 +19,13 @@ export default {
     },
     android: {
         adaptiveIcon: {
-            foregroundImage: "./src/assets/AppLogoColored.png",
+            foregroundImage: "./src/assets/images/AppLogoColored.png",
             backgroundColor: "#ffffff",
         },
         package: "com.joichiro02.lookahApp",
     },
     web: {
-        favicon: "./src/assets/AppLogoColored.png",
+        favicon: "./src/assets/images/AppLogoColored.png",
     },
     extra: {
         eas: {
