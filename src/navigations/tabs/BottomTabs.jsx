@@ -11,6 +11,7 @@ import Favorites from "screens/BottomTabs/Favorites";
 import Home from "screens/BottomTabs/Home";
 import Profile from "screens/BottomTabs/Profile";
 import Vouchers from "screens/BottomTabs/Vouchers";
+import { colors } from "themes";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +26,7 @@ export default function BottomTabs() {
                     borderRadius: 10,
                 },
                 tabBarHideOnKeyboard: true,
+                tabBarActiveTintColor: colors.Primary,
             }}
         >
             <Tab.Screen
