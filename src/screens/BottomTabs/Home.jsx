@@ -1,5 +1,5 @@
 // ** react and react-native imports
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 
 // ** libraries imports
@@ -84,7 +84,12 @@ const navItems = [
 ];
 
 export default function Home() {
+    // ** states
+    const [itemPressIndex, setItemPressIndex] = useState(-1);
+
+    // ** navigation methods
     const { navigate } = useNavigation();
+
     return (
         <>
             <HeaderCont>
@@ -124,15 +129,29 @@ export default function Home() {
                             data={navItems}
                             keyExtractor={(_, index) => index.toString()}
                             renderItem={({ item, index }) => (
-                                <View className="mb-4 flex-1 items-center space-y-1">
+                                <View
+                                    key={index}
+                                    className="mb-4 flex-1 items-center space-y-1"
+                                >
                                     <TouchableOpacity
-                                        onPress={() =>
+                                        onPress={() => {
                                             navigate(item.navigation, {
                                                 title: item.title,
                                                 subTitle: item.subTitle,
-                                            })
+                                            });
+                                        }}
+                                        onPressOut={() => setItemPressIndex(-1)}
+                                        onPressIn={() =>
+                                            setItemPressIndex(index)
                                         }
-                                        className=" bg-white rounded-md items-center justify-center p-1 shadow-md shadow-black"
+                                        activeOpacity={1}
+                                        className="rounded-md items-center justify-center p-1 shadow-md shadow-black"
+                                        style={{
+                                            backgroundColor:
+                                                itemPressIndex === index
+                                                    ? "#EB4335"
+                                                    : "#FFFFFF",
+                                        }}
                                     >
                                         <Image
                                             source={item.icon}
