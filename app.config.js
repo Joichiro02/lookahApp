@@ -22,7 +22,9 @@ export default {
             foregroundImage: "./src/assets/images/AppLogoColored.png",
             backgroundColor: "#ffffff",
         },
-        package: "com.joichiro02.lookahApp",
+        package: IS_DEV
+            ? "com.joichiro02.lookahApp.dev"
+            : "com.joichiro02.lookahApp",
     },
     web: {
         favicon: "./src/assets/images/AppLogoColored.png",
