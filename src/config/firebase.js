@@ -4,22 +4,22 @@ import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import {
-    API_KEY,
-    AUTH_DOMAIN,
-    PROJECT_ID,
-    STORAGE_BUCKET,
-    MESSAGING_SENDER_ID,
-    APP_ID,
+    FIREBASE_API_KEY,
+    FIREBASE_AUTH_DOMAIN,
+    FIREBASE_PROJECT_ID,
+    FIREBASE_STORAGE_BUCKET,
+    FIREBASE_MESSAGING_SENDER_ID,
+    FIREBASE_APP_ID,
 } from "react-native-dotenv";
 
 // ** firebase config
 const firebaseConfig = {
-    apiKey: String(API_KEY),
-    authDomain: String(AUTH_DOMAIN),
-    projectId: String(PROJECT_ID),
-    storageBucket: String(STORAGE_BUCKET),
-    messagingSenderId: String(MESSAGING_SENDER_ID),
-    appId: String(APP_ID),
+    apiKey: String(FIREBASE_API_KEY),
+    authDomain: String(FIREBASE_AUTH_DOMAIN),
+    projectId: String(FIREBASE_PROJECT_ID),
+    storageBucket: String(FIREBASE_STORAGE_BUCKET),
+    messagingSenderId: String(FIREBASE_MESSAGING_SENDER_ID),
+    appId: String(FIREBASE_APP_ID),
     // databaseURL: Constants.expoConfig.extra.databaseURL,
 };
 

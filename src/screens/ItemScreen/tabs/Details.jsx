@@ -3,7 +3,7 @@ import React from "react";
 import { ScrollView, Text, View } from "react-native";
 
 // ** libraries imports
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { MaterialIcons } from "react-native-vector-icons";
 
 export default function Details() {
@@ -26,6 +26,7 @@ export default function Details() {
                 </View>
 
                 <MapView
+                    provider={PROVIDER_GOOGLE}
                     initialRegion={{
                         //   latitude: restaurant.lat,
                         //   longitude: restaurant.lng,
@@ -35,7 +36,7 @@ export default function Details() {
                         longitudeDelta: 0.3,
                     }}
                     className="flex-1 h-60 my-2"
-                    mapType="mutedStandard"
+                    mapType="standard"
                 >
                     <Marker
                         coordinate={{

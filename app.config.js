@@ -25,6 +25,11 @@ export default {
         package: IS_DEV
             ? "com.joichiro02.lookahApp.dev"
             : "com.joichiro02.lookahApp",
+        config: {
+            googleMaps: {
+                apiKey: "AIzaSyBojVIfwLfWBlWivxi8IIbXP-rmUmDChCI",
+            },
+        },
     },
     web: {
         favicon: "./src/assets/images/AppLogoColored.png",
