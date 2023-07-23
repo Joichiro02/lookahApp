@@ -19,8 +19,9 @@ export default {
     },
     android: {
         adaptiveIcon: {
-            foregroundImage: "./src/assets/images/AppLogoColored.png",
-            backgroundColor: "#ffffff",
+            foregroundImage: "./src/assets/images/ApplicationLogo.png",
+            resizeMode: "contain",
+            // backgroundColor: "#ffffff",
         },
         package: IS_DEV
             ? "com.joichiro02.lookahApp.dev"
