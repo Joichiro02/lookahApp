@@ -1,12 +1,6 @@
 // ** react and react-native imports
 import React, { useEffect, useRef, useState } from "react";
-import {
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-    findNodeHandle,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import {
     collection,
@@ -20,22 +14,7 @@ import {
 import { auth, database } from "config/firebase";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
-const TextField = ({ label, value, setValue, ...params }) => {
-    return (
-        <View className="relative border border-[#7B7B7B] rounded-lg py-2 px-4 my-2">
-            <Text className="absolute text-[#7B7B7B] -top-2 left-3 bg-white px-1">
-                {label}
-            </Text>
-            <TextInput
-                value={value}
-                onChangeText={setValue}
-                className="text-lg"
-                {...params}
-            />
-        </View>
-    );
-};
+import InputField from "components/common/InputField";
 
 export default function MyProfile() {
     // ** state
@@ -87,25 +66,25 @@ export default function MyProfile() {
             }}
             extraHeight={50}
         >
-            <TextField
+            <InputField
                 label={"First Name"}
                 value={firstname}
                 setValue={setFirstname}
                 editable={edit}
             />
-            <TextField
+            <InputField
                 label={"Last Name"}
                 value={lastname}
                 setValue={setLastname}
                 editable={edit}
             />
-            <TextField
+            <InputField
                 label={"Nickname"}
                 value={nickname}
                 setValue={setNickname}
                 editable={edit}
             />
-            <TextField
+            <InputField
                 label={"Email Address"}
                 value={auth.currentUser.email}
                 textContentType="emailAddress"
@@ -121,7 +100,7 @@ export default function MyProfile() {
                     <Text>+63</Text>
                 </View>
                 <View className="flex-1">
-                    <TextField
+                    <InputField
                         label={"Mobile Number"}
                         value={phoneNum}
                         setValue={setPhonenum}

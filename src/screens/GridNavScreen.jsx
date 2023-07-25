@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // ** local imports
 import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
-import TextField from "components/common/InputField";
+import TextField from "components/common/InputSearchField";
 
 // ** images imports
 import Image1 from "assets/images/Image1.jpg";

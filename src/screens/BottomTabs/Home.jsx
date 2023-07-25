@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AppLogo from "assets/images/AppLogo.png";
 import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
-import TextField from "components/common/InputField";
+import TextField from "components/common/InputSearchField";
 
 // ** images imports
 import Carousel from "assets/images/Carousel.png";

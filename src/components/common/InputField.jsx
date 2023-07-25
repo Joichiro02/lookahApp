@@ -1,12 +1,17 @@
-import React from "react";
-import { TextInput, View } from "react-native";
-import { Feather } from "react-native-vector-icons";
+import { Text, TextInput, View } from "react-native";
 
-export default function InputField({ placeholder }) {
+export default function InputField({ label, value, setValue, ...params }) {
     return (
-        <View className="flex-row items-center bg-white w-48 rounded-md py-1 px-2 space-x-3 shadow-lg shadow-black">
-            <Feather name="search" size={20} />
-            <TextInput placeholder={placeholder} />
+        <View className="relative border border-[#7B7B7B] rounded-lg py-2 px-4 my-2">
+            <Text className="absolute text-[#7B7B7B] -top-2 left-3 bg-white px-1">
+                {label}
+            </Text>
+            <TextInput
+                value={value}
+                onChangeText={setValue}
+                className="text-lg"
+                {...params}
+            />
         </View>
     );
 }

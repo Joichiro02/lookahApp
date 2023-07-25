@@ -7,6 +7,7 @@ import {
 } from "react-native-vector-icons";
 
 // ** local imports
+import Admin from "screens/BottomTabs/Tabs/Admin";
 import Favorites from "screens/BottomTabs/Favorites";
 import Home from "screens/BottomTabs/Home";
 import Profile from "screens/BottomTabs/Profile";
@@ -24,6 +25,7 @@ export default function BottomTabs() {
                     marginHorizontal: 20,
                     marginBottom: 10,
                     borderRadius: 10,
+                    position: "absolute",
                 },
                 tabBarHideOnKeyboard: true,
                 tabBarActiveTintColor: colors.Primary,
@@ -69,6 +71,21 @@ export default function BottomTabs() {
                 name="Profile"
                 component={Profile}
             />
+            {/* {true && ( */}
+            <Tab.Screen
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialIcons
+                            color={color}
+                            name="admin-panel-settings"
+                            size={20}
+                        />
+                    ),
+                }}
+                name="Admin"
+                component={Admin}
+            />
+            {/* )} */}
         </Tab.Navigator>
     );
 }
