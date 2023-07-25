@@ -8,6 +8,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 // ** local imports
 import AuthStack from "navigations/stacks/AuthStack";
+import LoadingModal from "components/common/LoadingModal";
 import ScreenStack from "./ScreenStack";
 import { auth } from "config/firebase";
 
@@ -39,17 +40,7 @@ function RootNavigation() {
     }, [user]);
 
     if (isloading) {
-        return (
-            <View
-                style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <ActivityIndicator size="large" />
-            </View>
-        );
+        return <LoadingModal isVisible={true} />;
     }
 
     return (

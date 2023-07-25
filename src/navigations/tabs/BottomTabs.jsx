@@ -7,7 +7,7 @@ import {
 } from "react-native-vector-icons";
 
 // ** local imports
-import Admin from "screens/BottomTabs/Tabs/Admin";
+import Admin from "screens/BottomTabs/Admin";
 import Favorites from "screens/BottomTabs/Favorites";
 import Home from "screens/BottomTabs/Home";
 import Profile from "screens/BottomTabs/Profile";

@@ -6,7 +6,12 @@ import { colors } from "themes";
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function TopTabs({ initialRouteName, tabs, tabBarStyle }) {
+export default function TopTabs({
+    initialRouteName,
+    tabs,
+    tabBarStyle,
+    radius,
+}) {
     return (
         <Tab.Navigator
             initialRouteName={initialRouteName}
@@ -28,6 +33,7 @@ export default function TopTabs({ initialRouteName, tabs, tabBarStyle }) {
                 },
                 tabBarAndroidRipple: {
                     borderless: false,
+                    ...radius,
                 },
             }}
         >

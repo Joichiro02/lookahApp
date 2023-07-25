@@ -13,7 +13,7 @@ export default function DropdownField({ data, placeholder, value, setValue }) {
     const [isFocus, setIsFocus] = useState(false);
 
     return (
-        <View className="w-full my-2">
+        <View className="w-full">
             <Dropdown
                 style={[
                     styles.dropdown,
