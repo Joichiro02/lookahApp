@@ -8,7 +8,6 @@ import Toast from "react-native-toast-message";
 import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 // ** local imports
 import DateFormater from "utils/DateFormater";
