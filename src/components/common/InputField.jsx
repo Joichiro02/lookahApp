@@ -7,9 +7,9 @@ export default function InputField({ label, value, setValue, ...params }) {
                 {label}
             </Text>
             <TextInput
+                className="text-lg"
                 value={value}
                 onChangeText={setValue}
-                className="text-lg"
                 {...params}
             />
         </View>

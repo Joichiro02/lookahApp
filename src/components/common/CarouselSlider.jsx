@@ -17,7 +17,7 @@ export default function CarouselSlider({
             autoPlay={true}
             data={data}
             scrollAnimationDuration={2000}
-            onSnapToItem={(index) => console.log("current index:", index)}
+            // onSnapToItem={(index) => console.log("current index:", index)}
             renderItem={renderItem}
         />
     );
