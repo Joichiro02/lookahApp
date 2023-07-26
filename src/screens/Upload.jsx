@@ -40,7 +40,7 @@ export default function Upload() {
         // console.log(blob);
 
         // Upload file and metadata to the object 'images/mountains.jpg'
-        const storageRef = ref(storage, "images/" + "mountains.jpg");
+        const storageRef = ref(storage, "images/" + "mountains");
         const uploadTask = uploadBytesResumable(storageRef, blob);
 
         // Listen for state changes, errors, and completion of the upload.
