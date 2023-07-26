@@ -52,12 +52,12 @@ export default function Modal({ data, showModal, setShowModal }) {
     };
 
     useEffect(() => {
-        setTitle(data.title);
-        setDescription(data.description);
-        setContact(data.contact);
-        setOperationHour(data.operation_hour);
-        setAddress(data.address);
-        setCategory(data.category);
+        setTitle(data?.title);
+        setDescription(data?.description);
+        setContact(data?.contact);
+        setOperationHour(data?.operation_hour);
+        setAddress(data?.address);
+        setCategory(data?.category);
 
         return () => {
             setTitle("");

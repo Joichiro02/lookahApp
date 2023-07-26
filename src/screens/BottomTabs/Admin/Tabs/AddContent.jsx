@@ -23,7 +23,7 @@ const data = [
     { label: "Hotel", value: "hotel" },
     { label: "Bar & Grill", value: "barAndGrill" },
     { label: "Restaurant", value: "restaurant" },
-    { label: "Park", value: "Park" },
+    { label: "Park", value: "park" },
     { label: "Tourist Spot", value: "touristSpot" },
     { label: "Establishment", value: "establishment" },
     { label: "Activities", value: "activities" },
@@ -114,7 +114,10 @@ export default function AddContent() {
                         description,
                         category,
                         operation_hour: operationHour,
-                        photo: downloadURL,
+                        photo: {
+                            name: imageName,
+                            link: downloadURL,
+                        },
                         user: {
                             _id: auth.currentUser.uid,
                             name: auth.currentUser.email,
