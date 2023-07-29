@@ -1,3 +1,6 @@
+// ** react and react-native imports
+import React, { useEffect, useState } from "react";
+
 // ** libaries imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -6,10 +9,14 @@ import {
     Octicons,
 } from "react-native-vector-icons";
 
+import { doc, getDoc } from "firebase/firestore";
+import { auth, database } from "config/firebase";
+
 // ** local imports
 import Admin from "screens/BottomTabs/Admin";
 import Favorites from "screens/BottomTabs/Favorites";
 import Home from "screens/BottomTabs/Home";
+import LoadingModal from "components/common/LoadingModal";
 import Profile from "screens/BottomTabs/Profile";
 import Vouchers from "screens/BottomTabs/Vouchers";
 import { colors } from "themes";
@@ -17,6 +24,39 @@ import { colors } from "themes";
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabs() {
+    // ** states
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const getUser = async () => {
+        setIsLoading(true);
+        try {
+            const user = await getDoc(
+                doc(database, "users", auth.currentUser.uid)
+            );
+            if (Object.keys(user.data()).length > 0) {
+                setIsAdmin(user.data().is_admin);
+                setIsLoading(false);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    if (isLoading) {
+        return (
+            <LoadingModal
+                isVisible={true}
+                backdropOpacity={0}
+                text={"Fetching Data..."}
+            />
+        );
+    }
+
     return (
         <Tab.Navigator
             screenOptions={{
@@ -71,21 +111,21 @@ export default function BottomTabs() {
                 name="Profile"
                 component={Profile}
             />
-            {/* {true && ( */}
-            <Tab.Screen
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <MaterialIcons
-                            color={color}
-                            name="admin-panel-settings"
-                            size={20}
-                        />
-                    ),
-                }}
-                name="Admin"
-                component={Admin}
-            />
-            {/* )} */}
+            {isAdmin && (
+                <Tab.Screen
+                    options={{
+                        tabBarIcon: ({ color }) => (
+                            <MaterialIcons
+                                color={color}
+                                name="admin-panel-settings"
+                                size={20}
+                            />
+                        ),
+                    }}
+                    name="Admin"
+                    component={Admin}
+                />
+            )}
         </Tab.Navigator>
     );
 }

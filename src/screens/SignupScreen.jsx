@@ -44,6 +44,7 @@ export default function SignupScreen() {
                         lastname,
                         nickname,
                         phone_number: phoneNum,
+                        is_admin: false,
                         user: {
                             _id: data.user.uid,
                             name: data.user.email,
