@@ -14,12 +14,12 @@ import {
 
 // ** firebase config
 const firebaseConfig = {
-    apiKey: String(FIREBASE_API_KEY),
-    authDomain: String(FIREBASE_AUTH_DOMAIN),
-    projectId: String(FIREBASE_PROJECT_ID),
-    storageBucket: String(FIREBASE_STORAGE_BUCKET),
-    messagingSenderId: String(FIREBASE_MESSAGING_SENDER_ID),
-    appId: String(FIREBASE_APP_ID),
+    apiKey: FIREBASE_API_KEY,
+    authDomain: FIREBASE_AUTH_DOMAIN,
+    projectId: FIREBASE_PROJECT_ID,
+    storageBucket: FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
+    appId: FIREBASE_APP_ID,
     // databaseURL: Constants.expoConfig.extra.databaseURL,
 };
 
