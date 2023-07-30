@@ -18,7 +18,7 @@ import { database } from "config/firebase";
 // ** local imports
 import Container from "components/layouts/Container";
 import DropdownField from "components/common/DropdownField";
-import Modal from "../Modal";
+import Modal from "../../../Modal";
 import { colors } from "themes";
 
 const data = [
@@ -33,7 +33,7 @@ const data = [
     { label: "Promos", value: "promos" },
 ];
 
-export default function All() {
+export default function Content() {
     // ** states
     const [category, setCategory] = useState("");
     const [showModal, setShowModal] = useState(false);

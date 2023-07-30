@@ -30,7 +30,7 @@ const data = [
     { label: "Promos", value: "promos" },
 ];
 
-export default function AddContent() {
+export default function Content() {
     // ** states
     const [category, setCategory] = useState(null);
     const [image, setImage] = useState([]);

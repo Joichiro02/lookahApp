@@ -98,7 +98,7 @@ export default function Modal({ data, showModal, setShowModal }) {
                             ) : (
                                 <Image
                                     source={{
-                                        uri: "https://firebasestorage.googleapis.com/v0/b/lookah-ac281.appspot.com/o/images%2FIMG_26072023_092631?alt=media&token=12678790-17db-44aa-8006-52ada83f3da6",
+                                        uri: data?.photo.link,
                                     }}
                                     resizeMode="contain"
                                     className="h-56 w-56 self-center"
