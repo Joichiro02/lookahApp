@@ -9,15 +9,16 @@ import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-// ** local imports
-import DateFormater from "utils/DateFormater";
-import DropdownField from "components/common/DropdownField";
-import InputField from "components/common/InputField";
+// ** firebase imports
 import { auth, database, storage } from "config/firebase";
 
-import DefaultImage from "assets/images/DefaultImage.png";
-import LoadingModal from "components/common/LoadingModal";
+// ** local imports
 import Container from "components/layouts/Container";
+import DateFormater from "utils/DateFormater";
+import DefaultImage from "assets/images/DefaultImage.png";
+import DropdownField from "components/common/DropdownField";
+import InputField from "components/common/InputField";
+import LoadingModal from "components/common/LoadingModal";
 
 const data = [
     { label: "Hotel", value: "hotel" },
@@ -125,6 +126,15 @@ export default function Content() {
                     })
                         .then(() => {
                             setIsLoading(false);
+                            // ** clear the data
+                            setTitle("");
+                            setAddress("");
+                            setContact("");
+                            setDescription("");
+                            setCategory(null);
+                            setOperationHour("");
+                            setImage([]);
+
                             Toast.show({
                                 type: "success",
                                 text1: "Successfully Created",
