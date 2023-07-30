@@ -2,10 +2,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
     RefreshControl,
-    Image,
     Text,
     TouchableOpacity,
-    View,
     ImageBackground,
 } from "react-native";
 

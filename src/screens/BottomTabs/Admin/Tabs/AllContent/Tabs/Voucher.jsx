@@ -9,10 +9,10 @@ import {
 } from "react-native";
 
 // ** libraries imports
-import { collection, getDocs } from "firebase/firestore";
 import { FlashList } from "@shopify/flash-list";
 
-// ** firebase
+// ** firebase imports
+import { collection, getDocs } from "firebase/firestore";
 import { database } from "config/firebase";
 
 // ** local imports

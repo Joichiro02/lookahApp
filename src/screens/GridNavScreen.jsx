@@ -1,23 +1,46 @@
 // ** react and react-native imports
-import React from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 // ** libraries imports
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Ionicons, MaterialIcons, Octicons } from "react-native-vector-icons";
+import { FlashList } from "@shopify/flash-list";
+import { Ionicons, Octicons } from "react-native-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+// ** firebase
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { database } from "config/firebase";
 
 // ** local imports
 import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
 import TextField from "components/common/InputSearchField";
 
-// ** images imports
-import Image1 from "assets/images/Image1.jpg";
-
 export default function GridNavScreen() {
+    // ** states
+    const [fetchData, setFetchData] = useState([]);
+
+    // ** navigations
     const { goBack, navigate } = useNavigation();
     const { params } = useRoute();
+
+    const fetchAllData = async () => {
+        const dataRef = collection(database, "data");
+        const dataReturn = query(
+            dataRef,
+            where("category", "==", params.value)
+        );
+
+        const data = await getDocs(dataReturn);
+        setFetchData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    useEffect(() => {
+        fetchAllData();
+    }, [params.value]);
+
+    console.log(fetchData);
 
     return (
         <>
@@ -48,12 +71,14 @@ export default function GridNavScreen() {
                 </View>
 
                 <View className="flex-1 mt-2">
-                    <FlatList
+                    <FlashList
+                        estimatedItemSize={200}
                         showsVerticalScrollIndicator={false}
                         scrollEnabled
-                        data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-                        renderItem={() => (
+                        data={fetchData}
+                        renderItem={({ item, index }) => (
                             <TouchableOpacity
+                                key={index}
                                 onPress={() => navigate("ItemScreen")}
                                 className="my-2 space-y-1"
                             >
@@ -66,7 +91,7 @@ export default function GridNavScreen() {
                                     />
                                     <Image
                                         className="rounded-lg"
-                                        source={Image1}
+                                        source={{ uri: item.photo.link }}
                                         style={{ height: 200, width: "100%" }}
                                         resizeMode="cover"
                                     />
@@ -77,10 +102,10 @@ export default function GridNavScreen() {
                                             className="font-bold text-lg"
                                             numberOfLines={1}
                                         >
-                                            San Rafael River Adventure
+                                            {item.title}
                                         </Text>
                                         <Text className="text-[#878787] font-medium">
-                                            10:00 AM - 9:00 PM
+                                            {item.operation_hour}
                                         </Text>
                                     </View>
                                     <View className="items-end">
@@ -102,13 +127,18 @@ export default function GridNavScreen() {
                                             <Text className="font-medium">
                                                 Distance
                                             </Text>
-                                            <Text className="text-[#2D86FF] font-medium">
+                                            <Text className="text-[#34373c] font-medium">
                                                 0.8km
                                             </Text>
                                         </View>
                                     </View>
                                 </View>
                             </TouchableOpacity>
+                        )}
+                        ListEmptyComponent={() => (
+                            <Text className="text-center font-bold text-2xl my-4">
+                                No Data
+                            </Text>
                         )}
                     />
                 </View>

@@ -11,6 +11,7 @@ export default function CarouselSlider({
     const { width, height } = Dimensions.get("window");
     return (
         <Carousel
+            className="rounded-lg"
             loop
             width={width - padding}
             height={height / dinaminator}

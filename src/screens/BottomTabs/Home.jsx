@@ -1,17 +1,30 @@
 // ** react and react-native imports
-import React, { useState } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+    FlatList,
+    Image,
+    RefreshControl,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
 // ** libraries imports
+import { collection, getDocs } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
+import { FlashList } from "@shopify/flash-list";
 import { Foundation } from "react-native-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+// ** firebase
+import { database } from "config/firebase";
 
 // ** local imports
 import AppLogo from "assets/images/AppLogo.png";
 import BodyCont from "components/layouts/BodyCont";
 import HeaderCont from "components/layouts/HeaderCont";
 import TextField from "components/common/InputSearchField";
+import { colors } from "themes";
 
 // ** images imports
 import Carousel from "assets/images/Carousel.png";
@@ -25,11 +38,6 @@ import Restaurant from "assets/images/Restaurant.png";
 import TravelGuide from "assets/images/TravelGuide.png";
 import CarouselSlider from "components/common/CarouselSlider";
 
-import HomeSlider1 from "assets/images/HomeSlider-1.png";
-import HomeSlider2 from "assets/images/HomeSlider-2.png";
-import HomeSlider3 from "assets/images/HomeSlider-3.png";
-import HomeSlider4 from "assets/images/HomeSlider-4.png";
-
 const navItems = [
     {
         icon: DoubleBed,
@@ -37,6 +45,7 @@ const navItems = [
         title: "Hotels",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "hotel",
     },
     {
         icon: CockTail,
@@ -44,6 +53,7 @@ const navItems = [
         title: "Bar and Grill",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "barAndGrill",
     },
     {
         icon: Restaurant,
@@ -51,6 +61,7 @@ const navItems = [
         title: "Restaurants",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "restaurant",
     },
     {
         icon: Park,
@@ -58,6 +69,7 @@ const navItems = [
         title: "Park",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "park",
     },
     {
         icon: TravelGuide,
@@ -65,6 +77,7 @@ const navItems = [
         title: "Tourist Spot",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "touristSpot",
     },
     {
         icon: Company,
@@ -72,6 +85,7 @@ const navItems = [
         title: "Establishment",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "establishment",
     },
     {
         icon: Carousel,
@@ -79,6 +93,7 @@ const navItems = [
         title: "Activities",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "activities",
     },
     {
         icon: Percentage,
@@ -86,17 +101,39 @@ const navItems = [
         title: "Promos",
         subTitle: "Lorem ipsum dolor",
         navigation: "GridNavScreen",
+        value: "promos",
     },
 ];
-
-const CarouselData = [HomeSlider1, HomeSlider2, HomeSlider3, HomeSlider4];
 
 export default function Home() {
     // ** states
     const [itemPressIndex, setItemPressIndex] = useState(-1);
+    const [fetchBannersData, setFetchBannersData] = useState([]);
+    const [refreshing, setRefreshing] = useState(false);
 
     // ** navigation methods
     const { navigate } = useNavigation();
+
+    const fetchAllBannersData = async () => {
+        const dataRef = collection(database, "banners");
+
+        const data = await getDocs(dataRef);
+        setFetchBannersData(
+            data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+    };
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            fetchAllBannersData();
+            setRefreshing(false);
+        }, 2000);
+    }, []);
+
+    useEffect(() => {
+        fetchAllBannersData();
+    }, []);
 
     return (
         <>
@@ -146,6 +183,7 @@ export default function Home() {
                                             navigate(item.navigation, {
                                                 title: item.title,
                                                 subTitle: item.subTitle,
+                                                value: item.value,
                                             });
                                         }}
                                         onPressOut={() => setItemPressIndex(-1)}
@@ -174,7 +212,16 @@ export default function Home() {
                     </SafeAreaView>
 
                     <View className="flex-1">
-                        <FlatList
+                        <FlashList
+                            estimatedItemSize={200}
+                            refreshControl={
+                                <RefreshControl
+                                    colors={[colors.Primary]}
+                                    refreshing={refreshing}
+                                    onRefresh={onRefresh}
+                                    progressViewOffset={50}
+                                />
+                            }
                             ListHeaderComponent={() => (
                                 <View>
                                     <Text className="font-bold text-3xl">
@@ -182,14 +229,16 @@ export default function Home() {
                                     </Text>
 
                                     <CarouselSlider
-                                        data={CarouselData}
+                                        data={fetchBannersData}
                                         padding={40}
                                         dinaminator={5}
                                         renderItem={({ item, index }) => (
                                             <Image
-                                                source={item}
-                                                resizeMode="contain"
-                                                className="h-40 w-full"
+                                                source={{
+                                                    uri: item.photo.link,
+                                                }}
+                                                resizeMode="cover"
+                                                className="h-40 w-full rounded-lg"
                                             />
                                         )}
                                     />

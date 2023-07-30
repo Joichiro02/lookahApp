@@ -5,12 +5,12 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 // ** libraries imports
 import * as ImagePicker from "expo-image-picker";
 import Toast from "react-native-toast-message";
-import { addDoc, collection } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // ** firebase imports
+import { addDoc, collection } from "firebase/firestore";
 import { auth, database, storage } from "config/firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 // ** local imports
 import Container from "components/layouts/Container";

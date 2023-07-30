@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+// ** react and react-native imports
+import React, { useCallback, useEffect, useState } from "react";
 import {
-    Button,
     Image,
     ImageBackground,
+    RefreshControl,
     Text,
     TouchableOpacity,
     View,
 } from "react-native";
 
+// ** libraries imports
+import { FlashList } from "@shopify/flash-list";
+
+// ** firebase imports
+import { collection, getDocs } from "firebase/firestore";
+import { database } from "config/firebase";
+
+// ** local imports
 import ModalCont from "components/layouts/ModalCont";
+import { colors } from "themes";
 
 import Chives from "assets/images/chives.png";
 import VoucherBg from "assets/images/VoucherBg.png";
@@ -70,7 +80,7 @@ const VoucherComponent = ({ item, setOpen }) => {
                 <View className="ml-6 w-28 items-center justify-center">
                     <Image
                         className="h-20 w-24"
-                        source={item.img}
+                        source={{ uri: item.photo.link }}
                         // style={{ height: 80, width: 80 }}
                         resizeMode="contain"
                     />
@@ -79,7 +89,7 @@ const VoucherComponent = ({ item, setOpen }) => {
                     <Text className="font-bold text-2xl text-[#FF0844] uppercase">
                         {item.title}
                     </Text>
-                    <Text className="font-medium">{item.subtitle}</Text>
+                    <Text className="font-medium">{item.description}</Text>
                 </View>
             </ImageBackground>
         </TouchableOpacity>
@@ -87,17 +97,52 @@ const VoucherComponent = ({ item, setOpen }) => {
 };
 
 export default function All() {
+    // ** state
+    const [fetchData, setFetchData] = useState([]);
+    const [refreshing, setRefreshing] = useState(false);
     const [open, setOpen] = useState(false);
+
+    const fetchAllData = async () => {
+        const dataRef = collection(database, "vouchers");
+
+        const data = await getDocs(dataRef);
+        setFetchData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            fetchAllData();
+            setRefreshing(false);
+        }, 2000);
+    }, []);
+
+    useEffect(() => {
+        fetchAllData();
+    }, []);
+
     return (
         <>
             <View className="bg-white flex-1 px-5 py-2">
-                {data.map((item, index) => (
-                    <VoucherComponent
-                        item={item}
-                        key={index}
-                        setOpen={setOpen}
-                    />
-                ))}
+                <FlashList
+                    refreshControl={
+                        <RefreshControl
+                            colors={[colors.Primary]}
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                            progressViewOffset={50}
+                        />
+                    }
+                    data={fetchData}
+                    estimatedItemSize={200}
+                    renderItem={({ item, index }) => (
+                        <VoucherComponent
+                            item={item}
+                            key={index}
+                            setOpen={setOpen}
+                        />
+                    )}
+                />
             </View>
 
             <ModalCont open={open} setOpen={setOpen}>
