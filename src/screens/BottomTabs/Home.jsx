@@ -244,7 +244,7 @@ export default function Home() {
                                     />
                                     <View className="flex-row items-center justify-between">
                                         <Text className="font-bold text-3xl">
-                                            Nearby Activities
+                                            Latest Activities
                                         </Text>
                                         <Text className="underline">
                                             See All

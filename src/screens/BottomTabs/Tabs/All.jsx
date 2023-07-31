@@ -26,6 +26,8 @@ import VoucherBg2 from "assets/images/VoucherBg2.png";
 import Kwinsole from "assets/images/Kwinsole.png";
 import Illumina from "assets/images/Illumina.png";
 import Ribbon from "assets/images/ribbon.png";
+import NoData from "components/common/NoData";
+import Loading from "components/common/Loading";
 
 const data = [
     {
@@ -99,14 +101,22 @@ const VoucherComponent = ({ item, setOpen }) => {
 export default function All() {
     // ** state
     const [fetchData, setFetchData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
+
     const [open, setOpen] = useState(false);
 
     const fetchAllData = async () => {
-        const dataRef = collection(database, "vouchers");
-
-        const data = await getDocs(dataRef);
-        setFetchData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        try {
+            const dataRef = collection(database, "vouchers");
+            const data = await getDocs(dataRef);
+            setFetchData(
+                data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            );
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const onRefresh = useCallback(() => {
@@ -118,31 +128,38 @@ export default function All() {
     }, []);
 
     useEffect(() => {
+        // ** set loading here to not display the loading when refreshing the list
+        setIsLoading(true);
         fetchAllData();
     }, []);
 
     return (
         <>
             <View className="bg-white flex-1 px-5 py-2">
-                <FlashList
-                    refreshControl={
-                        <RefreshControl
-                            colors={[colors.Primary]}
-                            refreshing={refreshing}
-                            onRefresh={onRefresh}
-                            progressViewOffset={50}
-                        />
-                    }
-                    data={fetchData}
-                    estimatedItemSize={200}
-                    renderItem={({ item, index }) => (
-                        <VoucherComponent
-                            item={item}
-                            key={index}
-                            setOpen={setOpen}
-                        />
-                    )}
-                />
+                {isLoading ? (
+                    <Loading />
+                ) : (
+                    <FlashList
+                        refreshControl={
+                            <RefreshControl
+                                colors={[colors.Primary]}
+                                refreshing={refreshing}
+                                onRefresh={onRefresh}
+                                progressViewOffset={50}
+                            />
+                        }
+                        data={fetchData}
+                        estimatedItemSize={200}
+                        renderItem={({ item, index }) => (
+                            <VoucherComponent
+                                item={item}
+                                key={index}
+                                setOpen={setOpen}
+                            />
+                        )}
+                        ListEmptyComponent={() => <NoData />}
+                    />
+                )}
             </View>
 
             <ModalCont open={open} setOpen={setOpen}>
