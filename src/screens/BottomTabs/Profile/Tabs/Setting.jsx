@@ -25,7 +25,7 @@ export default function Setting() {
         <View className="flex-1 bg-white  p-5 pb-0">
             <View className="mb-6">
                 <Text className="text-[#7B7B7B] text-base">Display</Text>
-                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B]">
+                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B] py-2">
                     <Text className="font-semibold text-base">Dark Mode</Text>
                     <Switch
                         trackColor={{ false: "#e4e3e3", true: "#FF0844" }}
@@ -38,7 +38,7 @@ export default function Setting() {
 
             <View className="mb-6">
                 <Text className="text-[#7B7B7B] text-base">Preferences</Text>
-                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B]">
+                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B] py-2">
                     <Text className="font-semibold text-base">
                         Notification
                     </Text>
@@ -49,7 +49,7 @@ export default function Setting() {
                         onValueChange={setIsEnabled}
                     />
                 </View>
-                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B]">
+                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B] py-2">
                     <Text className="font-semibold text-base">
                         Alert and Promos
                     </Text>
@@ -60,7 +60,7 @@ export default function Setting() {
                         onValueChange={setIsEnabled}
                     />
                 </View>
-                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B]">
+                <View className="flex-row items-center justify-between border-b-0.5 border-[#7B7B7B] py-2">
                     <Text className="font-semibold text-base">
                         Auto Location
                     </Text>
