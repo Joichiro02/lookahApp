@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 // ** libraries imports
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, limit } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
 import { Foundation } from "react-native-vector-icons";
@@ -109,6 +109,7 @@ export default function Home() {
     // ** states
     const [itemPressIndex, setItemPressIndex] = useState(-1);
     const [fetchBannersData, setFetchBannersData] = useState([]);
+    const [fetchData, setFetchData] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
 
     // ** navigation methods
@@ -123,6 +124,13 @@ export default function Home() {
         );
     };
 
+    const fetchAllData = async () => {
+        const dataRef = query(collection(database, "data"), limit(10));
+
+        const data = await getDocs(dataRef);
+        setFetchData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         setTimeout(() => {
@@ -133,6 +141,7 @@ export default function Home() {
 
     useEffect(() => {
         fetchAllBannersData();
+        fetchAllData();
     }, []);
 
     return (
@@ -211,7 +220,7 @@ export default function Home() {
                         />
                     </SafeAreaView>
 
-                    <View className="flex-1">
+                    <View className="flex-1 mb-16">
                         <FlashList
                             estimatedItemSize={200}
                             refreshControl={
@@ -253,12 +262,15 @@ export default function Home() {
                                 </View>
                             )}
                             scrollEnabled
-                            data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-                            renderItem={() => (
-                                <View className="flex-row my-2 space-x-2">
+                            data={fetchData}
+                            renderItem={({ item, index }) => (
+                                <View
+                                    key={index}
+                                    className="flex-row my-2 space-x-2"
+                                >
                                     <Image
                                         className="rounded-lg"
-                                        source={Image1}
+                                        source={{ uri: item.photo.link }}
                                         style={{ height: 100, width: "50%" }}
                                         resizeMode="cover"
                                     />
@@ -267,9 +279,9 @@ export default function Home() {
                                             className="font-bold text-lg"
                                             numberOfLines={2}
                                         >
-                                            San Rafael River Adventure
+                                            {item.title}
                                         </Text>
-                                        <Text>10:00 AM - 10:00 PM</Text>
+                                        <Text>{item.operation_hour}</Text>
                                         <View>
                                             <Text>0.3km</Text>
                                         </View>
