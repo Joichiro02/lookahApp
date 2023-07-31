@@ -1,10 +1,6 @@
-import React from "react";
-import { Text, View } from "react-native";
+// ** local imports
+import DynamicContainer from "./DynamicContainer";
 
 export default function Hotel() {
-    return (
-        <View>
-            <Text>Hotel</Text>
-        </View>
-    );
+    return <DynamicContainer category="hotel" />;
 }

@@ -1,10 +1,6 @@
-import React from "react";
-import { Text, View } from "react-native";
+// ** local imports
+import DynamicContainer from "./DynamicContainer";
 
 export default function BarGrill() {
-    return (
-        <View>
-            <Text>BarGrill</Text>
-        </View>
-    );
+    return <DynamicContainer category="barAndGrill" />;
 }
