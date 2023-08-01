@@ -17,19 +17,19 @@ import TopTabs from "navigations/tabs/TopTabs";
 const tabs = [
     {
         name: "All",
-        component: All,
+        component: () => <All />,
     },
     {
         name: "Hotel",
-        component: Hotel,
+        component: () => <Hotel />,
     },
     {
         name: "Bar & Grill",
-        component: BarGrill,
+        component: () => <BarGrill />,
     },
     {
         name: "Restaurant",
-        component: Restaurant,
+        component: () => <Restaurant />,
     },
 ];
 

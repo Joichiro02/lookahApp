@@ -18,11 +18,11 @@ import Profile from "assets/images/profile.jpg";
 const tabs = [
     {
         name: "My Profile",
-        component: MyProfile,
+        component: () => <MyProfile />,
     },
     {
         name: "Settings",
-        component: Setting,
+        component: () => <Setting />,
     },
 ];
 

@@ -10,15 +10,15 @@ import Voucher from "./Tabs/Voucher";
 const tabs = [
     {
         name: "Content",
-        component: Content,
+        component: () => <Content />,
     },
     {
         name: "Voucher",
-        component: Voucher,
+        component: () => <Voucher />,
     },
     {
         name: "Banner",
-        component: Banner,
+        component: () => <Banner />,
     },
 ];
 

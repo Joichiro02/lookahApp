@@ -15,11 +15,11 @@ import TopTabs from "navigations/tabs/TopTabs";
 const tabs = [
     {
         name: "All Content",
-        component: All,
+        component: () => <All />,
     },
     {
         name: "Add Content",
-        component: AddContent,
+        component: () => <AddContent />,
     },
 ];
 
