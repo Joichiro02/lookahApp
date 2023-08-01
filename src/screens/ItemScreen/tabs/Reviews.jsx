@@ -5,10 +5,10 @@ import { FlatList, Image, Text, View } from "react-native";
 // ** libraries imports
 import { Octicons } from "react-native-vector-icons";
 
-// ** images imports
-import Image1 from "assets/images/Image1.jpg";
+// ** image
+import DefaultImage from "assets/images/DefaultImage.png";
 
-export default function Reviews() {
+export default function Reviews({ data }) {
     return (
         <View className="flex-1 bg-white">
             <FlatList
@@ -21,12 +21,21 @@ export default function Reviews() {
                         className="flex-row flex-1 rounded-md bg-white m-2 shadow-lg shadow-black p-3 space-x-4"
                     >
                         <View className="w-1/4 items-center justify-center space-y-1">
-                            <Image
-                                className="rounded-full"
-                                source={Image1}
-                                style={{ height: 60, width: 60 }}
-                                resizeMode="cover"
-                            />
+                            {data?.photo.link ? (
+                                <Image
+                                    className="rounded-full"
+                                    source={{ uri: data?.photo.link }}
+                                    style={{ height: 60, width: 60 }}
+                                    resizeMode="cover"
+                                />
+                            ) : (
+                                <Image
+                                    className="rounded-full"
+                                    source={DefaultImage}
+                                    style={{ height: 60, width: 60 }}
+                                    resizeMode="cover"
+                                />
+                            )}
                             <Text className="font-semibold">Mark Anthony</Text>
                         </View>
                         <View className="flex-1">

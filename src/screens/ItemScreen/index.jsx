@@ -1,5 +1,5 @@
 // ** react and react-native imports
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 // ** libraries imports
@@ -7,33 +7,58 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { AntDesign, Ionicons, Octicons } from "react-native-vector-icons";
 import { BlurView } from "expo-blur";
 
+// ** firebase
+import { doc, getDoc } from "firebase/firestore";
+import { database } from "config/firebase";
+
 // ** local imports
 import Description from "./tabs/Description";
 import Details from "./tabs/Details";
 import Reviews from "./tabs/Reviews";
 import TopTabs from "navigations/tabs/TopTabs";
 
-// ** images imports
-import Image1 from "assets/images/Image1.jpg";
-
-const tabs = [
-    {
-        name: "Description",
-        component: Description,
-    },
-    {
-        name: "Details",
-        component: Details,
-    },
-    {
-        name: "Reviews",
-        component: Reviews,
-    },
-];
+// ** image
+import DefaultImage from "assets/images/DefaultImage.png";
 
 export default function ItemScreen() {
+    // ** states
+    const [fetchData, setFetchData] = useState();
+
+    // ** navigation
     const { goBack } = useNavigation();
     const { params } = useRoute();
+
+    // ** tabs
+    const tabs = [
+        {
+            name: "Description",
+            component: () => <Description data={fetchData} />,
+        },
+        {
+            name: "Details",
+            component: () => <Details data={fetchData} />,
+        },
+        {
+            name: "Reviews",
+            component: () => <Reviews data={fetchData} />,
+        },
+    ];
+
+    const fetchAllData = async () => {
+        try {
+            const dataRef = doc(database, "data", params.id);
+
+            const data = await getDoc(dataRef);
+            setFetchData(data.data());
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAllData();
+    }, []);
+
     return (
         <View className="flex-1 bg-white">
             <View className="relative h-96 rounded-3xl shadow-2xl shadow-black">
@@ -43,13 +68,21 @@ export default function ItemScreen() {
                 >
                     <Ionicons name="chevron-back" color="white" size={30} />
                 </TouchableOpacity>
-
-                <Image
-                    className="rounded-3xl"
-                    source={Image1}
-                    style={{ height: "100%", width: "100%" }}
-                    resizeMode="cover"
-                />
+                {fetchData?.photo.link ? (
+                    <Image
+                        className="rounded-3xl"
+                        source={{ uri: fetchData?.photo.link }}
+                        style={{ height: "100%", width: "100%" }}
+                        resizeMode="cover"
+                    />
+                ) : (
+                    <Image
+                        className="rounded-3xl"
+                        source={DefaultImage}
+                        style={{ height: "100%", width: "100%" }}
+                        resizeMode="cover"
+                    />
+                )}
                 <BlurView
                     className="absolute flex-row justify-between w-full bottom-0 pt-2 pb-4 px-6 rounded-bl-3xl rounded-br-3xl"
                     tint="dark"
@@ -58,7 +91,7 @@ export default function ItemScreen() {
                     {/* <View className="absolute flex-row justify-between w-full bottom-0 pt-2 pb-4 px-6 rounded-bl-3xl rounded-br-3xl"> */}
                     <View>
                         <Text className="text-[#DADADA] text-xl font-semibold">
-                            Pinto Art Museum
+                            {fetchData?.title}
                         </Text>
                         <View className="flex-row items-center space-x-1">
                             <Octicons name="star-fill" color="#FFC700" />

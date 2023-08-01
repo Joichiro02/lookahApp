@@ -31,7 +31,6 @@ import Carousel from "assets/images/Carousel.png";
 import CockTail from "assets/images/Cocktail.png";
 import Company from "assets/images/Company.png";
 import DoubleBed from "assets/images/DoubleBed.png";
-import Image1 from "assets/images/Image1.jpg";
 import Park from "assets/images/Park.png";
 import Percentage from "assets/images/Percentage.png";
 import Restaurant from "assets/images/Restaurant.png";
@@ -170,7 +169,7 @@ export default function Home() {
                             </View>
                         </View>
                         <TouchableOpacity
-                            onPress={() => navigate("UploadScreen")}
+                        // onPress={() => navigate("UploadScreen")}
                         >
                             <Text className="text-lg font-bold underline">
                                 Change Location
@@ -264,8 +263,11 @@ export default function Home() {
                             scrollEnabled
                             data={fetchData}
                             renderItem={({ item, index }) => (
-                                <View
+                                <TouchableOpacity
                                     key={index}
+                                    onPress={() =>
+                                        navigate("ItemScreen", { id: item.id })
+                                    }
                                     className="flex-row my-2 space-x-2"
                                 >
                                     <Image
@@ -286,7 +288,7 @@ export default function Home() {
                                             <Text>0.3km</Text>
                                         </View>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             )}
                         />
                     </View>

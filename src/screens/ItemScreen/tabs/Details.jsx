@@ -6,7 +6,7 @@ import { ScrollView, Text, View } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { MaterialIcons } from "react-native-vector-icons";
 
-export default function Details() {
+export default function Details({ data }) {
     return (
         <ScrollView
             className="flex-1 bg-white"
@@ -20,9 +20,7 @@ export default function Details() {
                         color="#000000"
                         size={14}
                     />
-                    <Text className="text-sm">
-                        FM Gems Bldg. L. Sumulong, Circumferencial Rd.
-                    </Text>
+                    <Text className="text-sm">{data?.address}</Text>
                 </View>
 
                 <MapView

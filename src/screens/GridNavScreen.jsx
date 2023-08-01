@@ -116,7 +116,9 @@ export default function GridNavScreen() {
                             renderItem={({ item, index }) => (
                                 <TouchableOpacity
                                     key={index}
-                                    onPress={() => navigate("ItemScreen")}
+                                    onPress={() =>
+                                        navigate("ItemScreen", { id: item.id })
+                                    }
                                     className="my-2 space-y-1"
                                 >
                                     <View className="relative">

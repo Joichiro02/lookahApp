@@ -1,10 +1,17 @@
 // ** react and react-native imports
 import React, { useCallback, useEffect, useState } from "react";
-import { Image, RefreshControl, Text, View } from "react-native";
+import {
+    Image,
+    RefreshControl,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
 // ** libraries imports
 import { FlashList } from "@shopify/flash-list";
 import { Ionicons, MaterialIcons, Octicons } from "react-native-vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 // ** firebase
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -21,6 +28,9 @@ export default function DynamicContainer({ category }) {
     const [fetchData, setFetchData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
+
+    // ** navigation methods
+    const { navigate } = useNavigation();
 
     const fetchAllData = async () => {
         try {
@@ -72,7 +82,13 @@ export default function DynamicContainer({ category }) {
                     showsVerticalScrollIndicator={false}
                     data={fetchData}
                     renderItem={({ item, index }) => (
-                        <View key={index} className="flex-row my-2 space-x-2">
+                        <TouchableOpacity
+                            key={index}
+                            onPress={() =>
+                                navigate("ItemScreen", { id: item.id })
+                            }
+                            className="flex-row my-2 space-x-2"
+                        >
                             <Image
                                 className="rounded-lg"
                                 source={{ uri: item.photo.link }}
@@ -111,7 +127,7 @@ export default function DynamicContainer({ category }) {
                                     </Text>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     )}
                     ListEmptyComponent={() => <NoData />}
                 />

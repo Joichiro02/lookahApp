@@ -38,11 +38,9 @@ export default function TopTabs({
             }}
         >
             {tabs.map((tab, index) => (
-                <Tab.Screen
-                    key={index}
-                    name={tab.name}
-                    component={tab.component}
-                />
+                <Tab.Screen key={index} name={tab.name}>
+                    {tab.component}
+                </Tab.Screen>
             ))}
         </Tab.Navigator>
     );
